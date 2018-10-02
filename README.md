@@ -1,1 +1,2 @@
 # Structures
+JavaScript Data Structures
