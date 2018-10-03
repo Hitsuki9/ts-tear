@@ -1,3 +1,39 @@
+//es6 实现私有属性，但无法继承
+const Queue = (function () {
+    const items = new WeakMap();
+    class Queue {
+        constructor () {
+            items.set(this, []);
+        }
+        //向队列尾部添加一个（或几个）新的项
+        enqueue (element) {
+            let queue = items.get(this);
+            queue.push(element);
+        }
+        //移除队列的第一项，并返回被移除的元素
+        dequeue () {
+            let queue = items.get(this);
+            return queue.shift();
+        }
+        //返回队列的第一个元素
+        front () {
+            let queue = items.get(this);
+            return queue[0];
+        }
+        //判断队列是否为空
+        isEmpty () {
+            let queue = items.get(this);
+            return queue.length === 0 ? true : false;
+        }
+        //返回队列包含的元素个数
+        size () {
+            let queue = items.get(this);
+            return queue.length;
+        }
+    }
+    return Queue;
+})();
+
 //最小优先队列（设置优先级，在正确的位置添加元素） es6
 const PriorityQueue = (function PriorityQueue () {
     const items = new WeakMap();
@@ -26,12 +62,8 @@ const PriorityQueue = (function PriorityQueue () {
                 queue.push(queueElement);
             }
         }
-        print () {
-            let queue = items.get(this);
-            console.log(queue);
-        }
+        //其她队列方法（dequeue, front, isEmpty, size）
     }
-    //其她队列方法（dequeue, front, isEmpty, size）
     return PriorityQueue;
 })();
 

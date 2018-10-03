@@ -11,9 +11,9 @@ const Stack = (function () {
             stack.push(element);
         }
         //移除栈顶的元素，同时返回被移除的元素
-        pop (element) {
+        pop () {
             let stack = items.get(this);
-            return stack.pop(element);
+            return stack.pop();
         }
         //返回栈顶的元素
         peek () {
