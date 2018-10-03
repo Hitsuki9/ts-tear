@@ -68,3 +68,15 @@ const PriorityQueue = (function PriorityQueue () {
 })();
 
 //循环队列（击鼓传花） es6
+function hotPotato (nameList, num) {
+    let queue = new Queue();
+    for (let i = 0; i < nameList.length; i++) {
+        queue.enqueue(nameList[i]);
+    }
+    while (queue.size() > 1){
+        for (let i = 0; i < num; i++) {
+            queue.enqueue(queue.dequeue());//从队列开头移除一项并将此项添加到队列末尾
+        }
+    }
+    return queue.dequeue();//最后留下的一项
+}
