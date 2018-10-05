@@ -62,7 +62,7 @@ const PriorityQueue = (function PriorityQueue () {
                 queue.push(queueElement);
             }
         }
-        //其她队列方法（dequeue, front, isEmpty, size）
+        //其他队列方法（dequeue, front, isEmpty, size）
     }
     return PriorityQueue;
 })();
