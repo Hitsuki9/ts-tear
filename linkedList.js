@@ -176,7 +176,7 @@ const DoublyLinkedList = (function () {
                 let current = doublyLinkedList.head,//当前结点(将删除的结点)
                     previous,//前结点
                     index = 0;//索引
-                //分三种情况，分别在头、尾和中间插入结点
+                //分三种情况，分别在头、尾和中间删除结点
                 if (position === 0) {
                     doublyLinkedList.head = current.next;
                     if (doublyLinkedList.length === 1) {
