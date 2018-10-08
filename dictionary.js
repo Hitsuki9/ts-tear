@@ -1,3 +1,5 @@
+const LinkedList = require('./linkedList.js');
+
 //自定义字典 es6 实现私有属性，但无法继承
 const Dictionary = (function () {
     const items = new WeakMap();
@@ -99,4 +101,91 @@ const HashMap = (function () {
         }
     }
     return HashMap;
+})();
+
+//分离链接解决散列表冲突
+const HashMapImprove1 = (function () {
+    const items = new WeakMap();
+    //对应链表结点的element属性
+    class ValuePair {
+        constructor (key, value) {
+            this.key = key;
+            this.value = value;
+        }
+    }
+    class HashMapImprove {
+        constructor () {
+            items.set(this, {
+                //"lose lose"散列函数
+                loseloseHashCode (key) {
+                    let hash = 0;
+                    for (let i = 0; i < key.length; i++) {
+                        hash += key.charCodeAt(i);
+                    }
+                    return hash % 37;
+                },
+                table: []
+            });
+        }
+        //向散列表增加一个新的项
+        put (key, value) {
+            let hashMapImprove = items.get(this);
+            let position = hashMapImprove.loseloseHashCode(key);
+            if (hashMapImprove.table[position] == undefined) {
+                hashMapImprove.table[position] = new LinkedList();
+            }
+            hashMapImprove.table[position].append(new ValuePair(key, value));
+        }
+        //返回根据键名检索到的值
+        get (key) {
+            let hashMapImprove = items.get(this);
+            let position = hashMapImprove.loseloseHashCode(key);
+            if (hashMapImprove.table[position] !== undefined) {
+                let current = hashMapImprove.table[position].getHead();
+                //遍历链表来寻找键/值
+                while (current.next) {
+                    if (current.element.key === key) {
+                        return current.element.value;
+                    }
+                    current = current.next;
+                }
+                //检查元素在链表最后一个结点或链表只有一个结点的情况
+                if (current.element.key === key) {
+                    return current.element.value;
+                }
+            }
+            return undefined;
+        }
+        //根据键名从散列表中移除值
+        remove (key) {
+            let hashMapImprove = items.get(this);
+            let position = hashMapImprove.loseloseHashCode(key);
+            if (hashMapImprove.table[position] !== undefined) {
+                let current = hashMapImprove.table[position].getHead();
+                while (current.next) {
+                    if (current.element.key === key) {
+                        hashMapImprove.table[position].remove(current.element);
+                        if (hashMapImprove.table[position].isEmpty()) {
+                            hashMapImprove.table[position] = undefined;
+                        }
+                        return true;
+                    }
+                    current = current.next;
+                }
+                //检查元素在链表最后一个结点或链表只有一个结点的情况
+                if (current.element.key === key) {
+                    hashMapImprove.table[position].remove(current.element);
+                    if (hashMapImprove.table[position].isEmpty()) {
+                        hashMapImprove.table[position] = undefined;
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+        getTable () {
+            return items.get(this).table;
+        }
+    }
+    return HashMapImprove;
 })();

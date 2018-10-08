@@ -114,7 +114,7 @@ const LinkedList = (function () {
     return LinkedList;
 })();
 
-//双向链表 es6
+//双向链表 es6 实现私有属性，但无法继承
 const DoublyLinkedList = (function () {
     const params = new WeakMap();
     class Node {
@@ -206,3 +206,5 @@ const DoublyLinkedList = (function () {
     }
     return DoublyLinkedList;
 })();
+
+module.exports = LinkedList;
