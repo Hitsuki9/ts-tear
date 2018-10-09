@@ -140,7 +140,7 @@ const HashMapImprove1 = (function () {
         get (key) {
             let hashMapImprove = items.get(this);
             let position = hashMapImprove.loseloseHashCode(key);
-            if (hashMapImprove.table[position] !== undefined) {
+            if (hashMapImprove.table[position] != undefined) {
                 let current = hashMapImprove.table[position].getHead();
                 //遍历链表来寻找键/值
                 while (current.next) {
@@ -160,7 +160,7 @@ const HashMapImprove1 = (function () {
         remove (key) {
             let hashMapImprove = items.get(this);
             let position = hashMapImprove.loseloseHashCode(key);
-            if (hashMapImprove.table[position] !== undefined) {
+            if (hashMapImprove.table[position] != undefined) {
                 let current = hashMapImprove.table[position].getHead();
                 while (current.next) {
                     if (current.element.key === key) {
@@ -189,3 +189,12 @@ const HashMapImprove1 = (function () {
     }
     return HashMapImprove;
 })();
+
+//"djb2"散列函数
+function djb2HashCode (key) {
+    let hash = 5381;
+    for (let i = 0; i < key.length; i++) {
+        hash = hash * 33 + key.charCodeAt(i);
+    }
+    return hash % 1013;
+}
