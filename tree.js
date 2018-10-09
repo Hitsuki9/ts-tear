@@ -14,6 +14,14 @@ const BinarySearchTree = (function () {
                 root: null
             });
         }
+        insert (key) {}
+        search (key) {}
+        inOrderTraverse () {}
+        preOrderTraverse () {}
+        postOrderTraverse () {}
+        min () {}
+        max () {}
+        remove (key) {}
     }
     return BinarySearchTree;
 })();
