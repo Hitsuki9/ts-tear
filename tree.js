@@ -78,7 +78,42 @@ const BinarySearchTree = (function () {
                     }
                     return null;
                 },
-                removeNode (node, key) {
+                removeNode (node, key) {//remove方法的辅助函数 私有
+                    if (node == null) {
+                        return null;
+                    }
+                    if (key < node.key) {
+                        node.left = this.removeNode(node.left, key);
+                        return node;
+                    } else if (key > node.key) {
+                        node.right = this.removeNode(node.right, key);
+                        return node;
+                    } else {
+                        //第一种情况——一个叶子结点
+                        if (node.left == null && node.right == null) {
+                            node = null;
+                            return node;
+                        }
+                        //第二种情况——一个只有一个子结点的结点
+                        if (node.left == null) {
+                            node = node.right;
+                            return node;
+                        } else if (node.right == null) {
+                            node = node.left;
+                            return node;
+                        }
+                        //第三种情况——一个有两个子结点的结点
+                        let aux = this.findMinNode(node.right);
+                        node.key = aux.key;
+                        node.right = this.removeNode(node.right, aux.key);
+                        return node;
+                    }
+                },
+                findMinNode (node) {//removeNode方法的辅助函数
+                    while (node && node.left != null) {
+                        node = node.left;
+                    }
+                    return node;
                 }
             });
         }
@@ -98,7 +133,7 @@ const BinarySearchTree = (function () {
             return bst.searchNode(bst.root, key);
         }
         //通过中序遍历方式遍历所有结点
-        inOrderTraverse (callback) {
+        inOrderTraverse () {
             let bst = params.get(this);
             bst.inOrderTraverseNode(bst.root, function (value) {
                 console.log(value);
@@ -129,37 +164,16 @@ const BinarySearchTree = (function () {
             return bst.maxNode(bst.root);
         }
         //从树中移除某个结点
-        remove (key) {}
+        remove (key) {
+            let bst = params.get(this);
+            bst.root = bst.removeNode(bst.root, key);
+            return bst.root;
+        }
     }
     return BinarySearchTree;
 })();
 
-let tree = new BinarySearchTree();
-tree.insert(11);
-tree.insert(7);
-tree.insert(15);
-tree.insert(5);
-tree.insert(3);
-tree.insert(9);
-tree.insert(8);
-tree.insert(10);
-tree.insert(13);
-tree.insert(12);
-tree.insert(14);
-tree.insert(20);
-tree.insert(18);
-tree.insert(25);
-tree.inOrderTraverse();
-console.log('------------------------------------------');
-tree.preOrderTraverse();
-console.log('------------------------------------------');
-tree.postOrderTraverse();
-console.log('------------------------------------------');
-console.log(tree.min());
-console.log('------------------------------------------');
-console.log(tree.max());
-console.log('------------------------------------------');
-console.log(tree.search(5));
-console.log('------------------------------------------');
-console.log(tree.search(6));
-console.log('------------------------------------------');
+//自平衡树 es6 实现私有属性，但无法继承
+const AdelsonVelskiiLandi = (function () {
+
+})();
