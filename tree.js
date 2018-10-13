@@ -175,5 +175,52 @@ const BinarySearchTree = (function () {
 
 //自平衡树 es6 实现私有属性，但无法继承
 const AdelsonVelskiiLandi = (function () {
-
+    const params = new WeakMap();
+    class Node {
+        constructor (key) {
+            this.key = key;
+            this.left = null;
+            this.right = null;
+        }
+    }
+    class AdelsonVelskiiLandi {
+        constructor () {
+            params.set(this, {
+                root: null,//根结点
+                insertNode (node, newNode) {//insert方法的辅助函数
+                    
+                },
+                heightNode (node) {//计算结点高度
+                    if (node == null) {
+                        return -1;
+                    } else {
+                        return Math.max(this.heightNode(node.left), this.heightNode(node.right)) + 1;
+                    }
+                },
+                rotationRR (node) {//RR旋转
+                    let temp = node.right;
+                    node.right = temp.left;
+                    temp.left = node;
+                    return temp;
+                },
+                rotationLL (node) {//LL旋转
+                    let temp = node.left;
+                    node.left = temp.right;
+                    temp.right = node;
+                    return temp;
+                }
+            });
+        }
+        //向树中插入一个新的结点
+        insert (key) {
+            let avl = params.get(this);
+            let node = new Node(key);
+            if (avl.root == null) {
+                avl.root = node;
+            } else {
+                avl.insertNode(avl.root, node);
+            }
+        }
+    }
+    return AdelsonVelskiiLandi;
 })();
