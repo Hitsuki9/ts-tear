@@ -19,7 +19,7 @@ const BinarySearchTree = (function () {
                         } else {
                             this.insertNode(node.left, newNode);
                         }
-                    } else {
+                    } else if (newNode.key > node.key) {
                         if (node.right == null) {
                             node.right = newNode;
                         } else {
@@ -188,7 +188,28 @@ const AdelsonVelskiiLandi = (function () {
             params.set(this, {
                 root: null,//根结点
                 insertNode (node, newNode) {//insert方法的辅助函数
-                    
+                    if (node == null) {
+                        node = newNode;
+                    } else if (newNode.key < node.key) {
+                        node.left = this.insertNode(node.left, newNode);
+                        if (this.heightNode(node.left) - this.heightNode(node.right) > 1) {
+                            if (newNode.key < node.left.key) {
+                                node = this.rotationLL(node);
+                            } else if (newNode.key > node.left.key) {
+                                node = this.rotationLR(node);
+                            }
+                        }
+                    } else if (newNode.key > node.key) {
+                        node.right = this.insertNode(node.right, newNode);
+                        if (this.heightNode(node.right) - this.heightNode(node.left) > 1) {
+                            if (newNode.key > node.right.key) {
+                                node = this.rotationRR(node);
+                            } else if (newNode.key < node.right.key) {
+                                node = this.rotationRL(node);
+                            }
+                        }
+                    }
+                    return node;
                 },
                 heightNode (node) {//计算结点高度
                     if (node == null) {
@@ -208,6 +229,14 @@ const AdelsonVelskiiLandi = (function () {
                     node.left = temp.right;
                     temp.right = node;
                     return temp;
+                },
+                rotationLR (node) {//LR旋转
+                    node.left = this.rotationRR(node.left);
+                    return this.rotationLL(node);
+                },
+                rotationRL (node) {//RL旋转
+                    node.right = this.rotationLL(node.right);
+                    return this.rotationRR(node);
                 }
             });
         }
@@ -218,7 +247,7 @@ const AdelsonVelskiiLandi = (function () {
             if (avl.root == null) {
                 avl.root = node;
             } else {
-                avl.insertNode(avl.root, node);
+                avl.root = avl.insertNode(avl.root, node);
             }
         }
     }
