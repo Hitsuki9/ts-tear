@@ -80,3 +80,5 @@ function hotPotato (nameList, num) {
     }
     return queue.dequeue();//最后留下的一项
 }
+
+module.exports = Queue;

@@ -198,3 +198,5 @@ function djb2HashCode (key) {
     }
     return hash % 1013;
 }
+
+module.exports =  Dictionary;
