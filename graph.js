@@ -1,7 +1,7 @@
 const Dictionary = require('./dictionary.js');
 const Queue = require('./queue.js');
 
-//图 es6 实现私有属性，但无法继承
+//图 无向 未加权 es6 实现私有属性，但无法继承
 const Graph = (function () {
     const params = new WeakMap();
     class Graph {
@@ -9,6 +9,7 @@ const Graph = (function () {
             params.set(this, {
                 vertices: [],//存储结点的名字
                 adjList: new Dictionary(),//使用字典作为邻接表
+                time: 0,
                 /**
                  * 搜索方法的辅助函数 初始化结点颜色
                  * 白色：该结点还没有被访问
@@ -21,6 +22,36 @@ const Graph = (function () {
                         color[this.vertices[i]] = 'white';
                     }
                     return color;
+                },
+                dfsVisit (u, color, callback) {//深度优先搜索的辅助函数
+                    color[u] = 'grey';
+                    if (callback) {
+                        callback(u);
+                    }
+                    let neighbors = this.adjList.get(u);
+                    for (let i = 0; i < neighbors.length; i++) {
+                        let w = neighbors[i];
+                        if (color[w] === 'white') {
+                            this.dfsVisit(w, color, callback);
+                        }
+                    }
+                    color[u] = 'black';
+                },
+                DFSVisit (u, color, d, f, p) {//改进的深度优先搜索的辅助函数
+                    console.log(`discovered ${u}`);
+                    color[u] = 'grey';
+                    d[u] = ++this.time;
+                    let neighbors = this.adjList.get(u);
+                    for (let i = 0; i < neighbors.length; i++) {
+                        let w = neighbors[i];
+                        if (color[w] === 'white') {
+                            p[w] = u;
+                            this.DFSVisit(w, color, d, f, p);
+                        }
+                    }
+                    color[u] = 'black';
+                    f[u] = ++this.time;
+                    console.log(`explored ${u}`);
                 }
             });
         }
@@ -89,9 +120,41 @@ const Graph = (function () {
                 predecessors: pred
             };
         }
-        //从结点v开始进行深度优先搜索
-        dfs (v) {
-
+        //深度优先搜索
+        dfs () {
+            let graph = params.get(this);
+            let color = graph.initializeColor();
+            for (let i = 0; i < graph.vertices.length; i++) {
+                if (color[graph.vertices[i]] === 'white') {
+                    graph.dfsVisit(graph.vertices[i], color, value => {
+                        console.log(value);
+                    });
+                }
+            }
+        }
+        //改进过的深度优先搜索
+        DFS () {
+            let graph = params.get(this);
+            let color = graph.initializeColor(),
+                d = [],//所有结点的发现时间
+                f = [],//所有结点的完成探索实践
+                p = [];//所有结点的前溯点
+            graph.time = 0;
+            for (let i = 0; i < graph.vertices.length; i++) {
+                f[graph.vertices[i]] = 0;
+                d[graph.vertices[i]] = 0;
+                p[graph.vertices[i]] = null;
+            }
+            for (let i = 0; i < graph.vertices.length; i++) {
+                if (color[graph.vertices[i]] === 'white') {
+                    graph.DFSVisit(graph.vertices[i], color, d, f, p);
+                }
+            }
+            return {
+                discovery: d,
+                finished: f,
+                predecessors: p
+            };
         }
     }
     return Graph;
