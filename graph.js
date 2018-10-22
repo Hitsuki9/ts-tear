@@ -159,3 +159,44 @@ const Graph = (function () {
     }
     return Graph;
 })();
+
+let graph = [//邻接矩阵
+    [0, 2, 4, 0, 0, 0],
+    [0, 0, 1, 4, 2, 0],
+    [0, 0, 0, 0, 3, 0],
+    [0, 0, 0, 0, 0, 2],
+    [0, 0, 0, 3, 0, 2],
+    [0, 0, 0, 0, 0, 0]
+];
+//Dijkstra算法
+function dijkstra (src) {
+    let dist = [],
+        visited = [],
+        length = graph.length;
+    for (let i = 0; i < length; i++) {
+        dist[i] = Number.MAX_SAFE_INTEGER;//初始化所有距离
+        visited[i] = false;
+    }
+    dist[src] = 0;//源顶点到自己的距离为0
+    for (let i = 0; i < length - 1; i++) {
+        let u = minDistance(dist, visited);
+        visited[u] = true;
+        for (let i = 0; i < length; i++) {
+            if (!visited[i] && graph[u][i] != 0 && dist[u] != Number.MAX_SAFE_INTEGER && dist[u] + graph[u][i] < dist[i]) {
+                dist[i] = dist[u] + graph[u][i];
+            }
+        }
+    }
+    return dist;
+}
+function minDistance (dist, visited) {
+    let min = Number.MAX_SAFE_INTEGER,
+        minIndex = -1;
+    for (let i = 0; i < dist.length; i++) {
+        if (visited[i] === false && dist[i] <= min) {
+            min = dist[i];
+            minIndex = i;
+        }
+    }
+    return minIndex;
+}
