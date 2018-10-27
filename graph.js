@@ -160,16 +160,16 @@ const Graph = (function () {
     return Graph;
 })();
 
-let graph = [//邻接矩阵
-    [0, 2, 4, 0, 0, 0],
-    [0, 0, 1, 4, 2, 0],
-    [0, 0, 0, 0, 3, 0],
-    [0, 0, 0, 0, 0, 2],
-    [0, 0, 0, 3, 0, 2],
-    [0, 0, 0, 0, 0, 0]
-];
 //Dijkstra算法
 function dijkstra (src) {
+    let graph = [//邻接矩阵
+        [0, 2, 4, 0, 0, 0],
+        [0, 0, 1, 4, 2, 0],
+        [0, 0, 0, 0, 3, 0],
+        [0, 0, 0, 0, 0, 2],
+        [0, 0, 0, 3, 0, 2],
+        [0, 0, 0, 0, 0, 0]
+    ];
     let dist = [],
         visited = [],
         length = graph.length;
@@ -200,3 +200,83 @@ function minDistance (dist, visited) {
     }
     return minIndex;
 }
+
+//Floyd-Warshall算法
+function floydWarshall () {
+    let INF = Number.MAX_SAFE_INTEGER;
+    let graph = [//邻接矩阵
+        [0, 2, 4, INF, INF, INF],
+        [INF, 0, 1, 4, 2, INF],
+        [INF, INF, 0, INF, 3, INF],
+        [INF, INF, INF, 0, INF, 2],
+        [INF, INF, INF, 3, 0, 2],
+        [INF, INF, INF, INF, INF, 0]
+    ];
+    let dist = [],
+        length = graph.length;
+    //初始化dist数组为每个顶点之间的权值
+    for (let i = 0; i < length; i++) {
+        dist[i] = [];
+        for (let j = 0; j < length; j++) {
+            dist[i][j] = graph[i][j];
+        }
+    }
+    for (let i = 0; i < length; i++) {
+        for (let j = 0; j < length; j++) {
+            for (let k = 0; k < length; k++) {
+                if (dist[j][i] + dist[i][k] < dist[j][k]) {
+                    dist[j][k] = dist[j][i] + dist[i][k];
+                }
+            }
+        }
+    }
+    return dist;
+}
+
+//Prim算法
+function prim () {
+    let graph = [//邻接矩阵
+        [0, 2, 4, 0, 0, 0],
+        [2, 0, 2, 4, 2, 0],
+        [4, 2, 0, 0, 3, 0],
+        [0, 4, 0, 0, 3, 2],
+        [0, 2, 3, 3, 0, 2],
+        [0, 0, 0, 2, 2, 0]
+    ];
+    let parent = [],//MST路径
+        key = [],//权重
+        visited = [],
+        length = graph.length;
+    for (let i = 0; i < length; i++) {
+        key[i] = Number.MAX_SAFE_INTEGER;
+        visited[i] = false;
+    }
+    key[0] = 0;
+    parent[0] = 0;
+    for (let i = 0; i < length; i++) {
+        let u = minKey(key, visited);
+        visited[u] = true;
+        for (let i = 0; i < length; i++) {
+            if (graph[u][i] && visited[i] === false && graph[u][i] < key[i]) {
+                parent[i] = u;
+                key[i] = graph[u][i];
+            }
+        }
+    }
+    for (let i = 0; i < length; i++) {
+        parent[i] = `${parent[i]} - ${i}`;
+    }
+    return { parent, key };
+}
+function minKey (key, visited) {
+    let min = Number.MAX_SAFE_INTEGER,
+        minIndex = -1;
+    for (let i = 0; i < key.length; i++) {
+        if (visited[i] === false && key[i] <= min) {
+            min = key[i];
+            minIndex = i;
+        }
+    }
+    return minIndex;
+}
+console.log(prim());
