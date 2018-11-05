@@ -279,4 +279,3 @@ function minKey (key, visited) {
     }
     return minIndex;
 }
-console.log(prim());
