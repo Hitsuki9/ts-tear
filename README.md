@@ -1,2 +1,2 @@
-# Structures
+# structures
 JavaScript Data Structures
