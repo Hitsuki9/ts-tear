@@ -8,7 +8,7 @@ function fn(a: number, b?: number) {
   b && (i *= b);
 }
 
-test('debounce function is working without bugs', (done) => {
+test('debounce function is working with bugs', (done) => {
   for (let i = 0; i < 100; i++) {
     cb(5);
   }
