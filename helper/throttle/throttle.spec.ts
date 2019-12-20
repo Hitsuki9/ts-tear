@@ -8,7 +8,7 @@ function fn(a: number, b?: number) {
   b && (i *= b);
 }
 
-test('throttle function working with bugs', (done) => {
+test('throttle function is working with bugs', (done) => {
   for (let i = 0; i < 10; i++) {
     setTimeout(() => {
       cb(1);
