@@ -5,7 +5,7 @@ class Uncle extends GrandParent {}
 class Parent extends GrandParent {}
 class Son extends Parent {}
 
-test('instanceof is working with bugs', () => {
+test('instanceof is working without bugs', () => {
   expect(_instanceof([], Object)).toBeTruthy();
   expect(_instanceof(() => {}, Object)).toBeTruthy();
   expect(_instanceof(new GrandParent(), Object)).toBeTruthy();
