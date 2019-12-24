@@ -25,17 +25,12 @@ Object.prototype.toString.call(arr); // '[Object Array]'
 
 ```ts
 function flat(arr: any[], depth: number = 1) {
+  if (depth <= 0) {
+    return arr.slice();
+  }
   let res: any[] = [];
   arr.forEach((item) => {
-    if (Array.isArray(item)) {
-      if (depth > 0) {
-        res = res.concat(flat(item, depth - 1)); // 递归
-      } else {
-        res.push(item.slice());
-      }
-    } else {
-      res.push(item);
-    }
+    res = res.concat(Array.isArray(item) ? flat(item, depth - 1) : item); // 递归
   });
   return res;
 }
