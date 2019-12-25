@@ -34,10 +34,7 @@ export default function deepClone<
         // 解决一层循环引用问题
         if (item === data) {
           res[index] = res;
-        } else if (
-          Array.isArray(item) ||
-          (typeof item === 'object' && item !== null)
-        ) {
+        } else if (typeof item === 'object' && item !== null) {
           loopList.push({
             parent: res,
             key: index.toString(),
@@ -47,15 +44,12 @@ export default function deepClone<
           res[index] = item;
         }
       }
-    } else if (typeof data === 'object' && data !== null) {
+    } else {
       for (const [key, value] of Object.entries(data)) {
         // 解决一层循环引用问题
         if (value === data) {
           res[key] = res;
-        } else if (
-          Array.isArray(value) ||
-          (typeof value === 'object' && value !== null)
-        ) {
+        } else if (typeof value === 'object' && value !== null) {
           loopList.push({
             parent: res,
             key,
