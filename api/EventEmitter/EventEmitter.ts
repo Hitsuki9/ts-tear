@@ -16,11 +16,29 @@ export default class EventEmitter {
       this.events.set(type, [fn]);
     }
   }
+  removeListener(type: string, fn: Function) {
+    const handlers = this.events.get(type);
+    if (handlers) {
+      for (const [idx, handler] of handlers.entries()) {
+        if (handler === fn) {
+          handlers.splice(idx, 1);
+          return;
+        }
+      }
+    }
+  }
+  once(type: string, fn: Function) {
+    const wrapper = function(this: EventEmitter, ...args: any[]) {
+      fn(...args);
+      this.removeListener(type, fn);
+    };
+    this.addListener(type, wrapper);
+  }
   emit(type: string, ...args: any[]) {
     const handlers = this.events.get(type);
     if (handlers) {
       for (let i = 0; i < handlers.length; i++) {
-        handlers[i](...args)
+        handlers[i](...args);
       }
     }
     return true;
