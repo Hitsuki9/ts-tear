@@ -18,6 +18,7 @@ function distinct(arr: any[]) {
   );
 }
 ```
+
 > 也可使用 `Object` 实现，但需注意**对象的键值只能是字符串**。
 
 ## 对比

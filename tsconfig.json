@@ -1,10 +1,7 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "lib": [
-      "dom",
-      "esnext"
-    ],
+    "lib": ["dom", "esnext"],
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -13,14 +10,8 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "noEmit": true
   },
-  "include": [
-    "algorithm/**/*",
-    "api/**/*",
-    "helper/**/*"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["algorithm/**/*", "api/**/*", "helper/**/*"],
+  "exclude": ["node_modules"]
 }
