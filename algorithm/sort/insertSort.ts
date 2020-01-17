@@ -4,14 +4,14 @@
  */
 export default function insertSort(arr: number[]) {
   const len = arr.length;
-  let loopCount = 0;
-  let changeCount = 0;
+  // let loopCount = 0;
+  // let changeCount = 0;
   for (let i = 1; i < len; i++) {
     let target = i;
     for (let j = i - 1; j >= 0; j--) {
-      loopCount++;
+      // loopCount++;
       if (arr[j] > arr[target]) {
-        changeCount++;
+        // changeCount++;
         [arr[j], arr[target]] = [arr[target], arr[j]];
         target = j;
       } else {
@@ -19,6 +19,5 @@ export default function insertSort(arr: number[]) {
       }
     }
   }
-  console.log('循环次数', loopCount);
-  console.log('交换次数', changeCount);
+  // console.log(`循环次数：${loopCount}\n交换次数：${changeCount}`);
 }

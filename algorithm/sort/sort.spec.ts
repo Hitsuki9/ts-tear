@@ -6,21 +6,23 @@ import quickSort from './quickSort';
 import selectionSort from './selectionSort';
 
 const arrCase: number[] = [];
-for (let i = 0; i < 50000; i++) {
+const count = 50000;
+for (let i = 0; i < count; i++) {
   arrCase[i] = Math.floor(Math.random() * 200000);
 }
-// for (let i = 0; i < 50000; i++) {
-//   arrCase[i] = 50000 - i;
+// for (let i = 0; i < count; i++) {
+//   arrCase[i] = count - i;
 // }
-// for (let i = 0; i < 50000; i++) {
+// for (let i = 0; i < count; i++) {
 //   arrCase[i] = i;
 // }
 const correctRes = arrCase.slice();
 correctRes.sort((a, b) => a - b);
 
 test('sort functions are working without bugs', () => {
-  // 冒泡排序
+  let endIdx = count - 1;
   let newCase = arrCase.slice();
+  // 冒泡排序
   let start = Date.now();
   bubbleSort(newCase);
   let end = Date.now();
@@ -39,5 +41,30 @@ test('sort functions are working without bugs', () => {
   selectionSort(newCase);
   end = Date.now();
   console.log(`selection sort: ${end - start}ms`);
+  expect(newCase).toEqual(correctRes);
+  // 快速排序
+  try {
+    newCase = arrCase.slice();
+    start = Date.now();
+    quickSort(newCase, 0, endIdx);
+    end = Date.now();
+    console.log(`quick sort: ${end - start}ms`);
+    expect(newCase).toEqual(correctRes);
+  } catch (err) {
+    console.log(err.message);
+  }
+  // 归并排序
+  newCase = arrCase.slice();
+  start = Date.now();
+  mergeSort(newCase, 0, endIdx);
+  end = Date.now();
+  console.log(`merge sort: ${end - start}ms`);
+  expect(newCase).toEqual(correctRes);
+  // 堆排序
+  newCase = arrCase.slice();
+  start = Date.now();
+  heapSort(newCase);
+  end = Date.now();
+  console.log(`heap sort: ${end - start}ms`);
   expect(newCase).toEqual(correctRes);
 });
