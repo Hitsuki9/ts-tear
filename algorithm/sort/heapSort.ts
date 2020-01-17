@@ -1,3 +1,7 @@
+/**
+ * 堆排序 O(nlogn)
+ * @param arr 数组
+ */
 export default function heapSort(arr: number[]) {
   createHeap(arr);
   // 交换第一个与最后一个元素，然后将剩下的元素重新调整为大顶堆
