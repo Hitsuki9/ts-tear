@@ -6,7 +6,7 @@ import quickSort from './quickSort';
 import selectionSort from './selectionSort';
 
 const arrCase: number[] = [];
-const count = 50000;
+const count = 500;
 for (let i = 0; i < count; i++) {
   arrCase[i] = Math.floor(Math.random() * 200000);
 }

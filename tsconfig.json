@@ -12,6 +12,6 @@
     "isolatedModules": true,
     "noEmit": true
   },
-  "include": ["algorithm/**/*", "api/**/*", "helper/**/*"],
+  "include": ["algorithm/**/*", "api/**/*", "helper/**/*", "structure/**/*"],
   "exclude": ["node_modules"]
 }
