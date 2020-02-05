@@ -8,9 +8,9 @@ export default function leftPad(str: string, len: number, ch = ' ') {
   let length = len - str.length;
   let res = '';
   while (length) {
-    if (length % 2 === 1) res += ch;
+    if (length % 2 === 1) res += ch; // 位运算优化 length & 1
     if (length === 1) return res + str;
     ch += ch;
-    length = Math.floor(length / 2);
+    length = Math.floor(length / 2); // 位运算优化 length = length >> 1
   }
 }

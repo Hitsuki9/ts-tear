@@ -24,47 +24,42 @@ test('sort functions are working without bugs', () => {
   let newCase = arrCase.slice();
   // 冒泡排序
   let start = Date.now();
+  console.time('bubble sort');
   bubbleSort(newCase);
-  let end = Date.now();
-  console.log(`bubble sort: ${end - start}ms`);
+  console.timeEnd('bubble sort');
   expect(newCase).toEqual(correctRes);
   // 插入排序
   newCase = arrCase.slice();
-  start = Date.now();
+  console.time('insert sort');
   insertSort(newCase);
-  end = Date.now();
-  console.log(`insert sort: ${end - start}ms`);
+  console.timeEnd('insert sort');
   expect(newCase).toEqual(correctRes);
   // 选择排序
   newCase = arrCase.slice();
-  start = Date.now();
+  console.time('selection sort');
   selectionSort(newCase);
-  end = Date.now();
-  console.log(`selection sort: ${end - start}ms`);
+  console.timeEnd('selection sort');
   expect(newCase).toEqual(correctRes);
   // 快速排序
   try {
     newCase = arrCase.slice();
-    start = Date.now();
+    console.time('quick sort');
     quickSort(newCase, 0, endIdx);
-    end = Date.now();
-    console.log(`quick sort: ${end - start}ms`);
+    console.timeEnd('quick sort');
     expect(newCase).toEqual(correctRes);
   } catch (err) {
     console.log(err.message);
   }
   // 归并排序
   newCase = arrCase.slice();
-  start = Date.now();
+  console.time('merge sort');
   mergeSort(newCase, 0, endIdx);
-  end = Date.now();
-  console.log(`merge sort: ${end - start}ms`);
+  console.timeEnd('merge sort');
   expect(newCase).toEqual(correctRes);
   // 堆排序
   newCase = arrCase.slice();
-  start = Date.now();
+  console.time('heap sort');
   heapSort(newCase);
-  end = Date.now();
-  console.log(`heap sort: ${end - start}ms`);
+  console.timeEnd('heap sort');
   expect(newCase).toEqual(correctRes);
 });
