@@ -2,7 +2,6 @@
   "name": "ts-tear",
   "version": "1.0.0",
   "description": "手撕代码",
-  "main": "index.js",
   "scripts": {
     "lint": "prettier --write \"./**/*.{js,json,ts,md}\"",
     "test": "jest"
@@ -17,5 +16,13 @@
     "ts-jest": "^25.2.1",
     "ts-node": "^8.6.2",
     "typescript": "^3.8.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hitsuki9/ts-tear.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Hitsuki9/ts-tear/issues"
+  },
+  "homepage": "https://github.com/Hitsuki9/ts-tear#readme"
 }

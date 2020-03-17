@@ -4,7 +4,7 @@
  */
 export default function heapSort(arr: number[]) {
   createHeap(arr);
-  // 交换第一个与最后一个元素，然后将剩下的元素重新调整为大顶堆
+  // 交换堆顶元素与最后一个元素，然后将剩下的元素重新调整为大顶堆
   for (let i = arr.length - 1; i > 0; i--) {
     [arr[i], arr[0]] = [arr[0], arr[i]];
     adjust(arr, 0, i);
