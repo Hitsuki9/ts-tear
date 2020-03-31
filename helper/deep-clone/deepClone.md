@@ -15,7 +15,7 @@
 const a = {
   age: undefined,
   sex: Symbol(),
-  jobs: function() {},
+  jobs: function () {},
   name: 'Hitsuki9'
 };
 

@@ -103,13 +103,13 @@ export default class Promise<T = unknown> {
     onfulfilled =
       typeof onfulfilled === 'function'
         ? onfulfilled
-        : function(value) {
+        : function (value) {
             return (value as unknown) as U;
           };
     onrejected =
       typeof onrejected === 'function'
         ? onrejected
-        : function(reason) {
+        : function (reason) {
             throw reason;
           };
     if (this.status === 'fulfilled') {

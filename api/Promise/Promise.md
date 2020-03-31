@@ -10,11 +10,11 @@ function Promise(excutor) {
   }
   excutor(resolve.bind(self));
 }
-Promise.prototype.then = function(onResolved) {
+Promise.prototype.then = function (onResolved) {
   var self = this;
   // 返回一个新的 promise
   return new Promise((resolve) => {
-    self.onResolvedCallback.push(function() {
+    self.onResolvedCallback.push(function () {
       var result = onResolved(self.data);
       if (result instanceof Promise) {
         // resolve 的权力被交给了 user promise
