@@ -6,6 +6,7 @@ import quickSort from './quickSort';
 import selectionSort from './selectionSort';
 import shellSort from './shellSort';
 import countingSort from './countingSort';
+import radixSort from './radixSort';
 
 const arrCase: number[] = [];
 const count = 50;
@@ -75,5 +76,11 @@ test('sort functions are working without bugs', () => {
   console.time('counting sort');
   countingSort(newCase);
   console.timeEnd('counting sort');
+  expect(newCase).toEqual(correctRes);
+  // 基数排序
+  newCase = arrCase.slice();
+  console.time('radix sort');
+  radixSort(newCase);
+  console.timeEnd('radix sort');
   expect(newCase).toEqual(correctRes);
 });
