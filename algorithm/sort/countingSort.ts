@@ -10,7 +10,7 @@ export default function countingSort(arr: number[]) {
     if (item < min) min = item;
   }
   const temp = new Array(max - min + 1).fill(0);
-  for (const item of arr) temp[item - min]++
+  for (const item of arr) temp[item - min]++;
   let j = 0;
   for (let i = 0; i < arr.length; i++) {
     while (!temp[j]) j++;
