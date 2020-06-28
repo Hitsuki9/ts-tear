@@ -1,4 +1,4 @@
-import ListNode from './node';
+import ListNode from './Node';
 
 /**
  * 链表
