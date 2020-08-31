@@ -26,7 +26,6 @@ test('sort functions are working without bugs', () => {
   let endIdx = count - 1;
   let newCase = arrCase.slice();
   // 冒泡排序
-  let start = Date.now();
   console.time('bubble sort');
   bubbleSort(newCase);
   console.timeEnd('bubble sort');

@@ -7,9 +7,10 @@ export default function shellSort(arr: number[]) {
   let gap = len >> 1;
   while (gap) {
     for (let i = gap; i < len; i++) {
-      while (i - gap >= 0 && arr[i - gap] > arr[i]) {
-        [arr[i - gap], arr[i]] = [arr[i], arr[i - gap]];
-        i -= gap;
+      let j = i;
+      while (j - gap >= 0 && arr[j - gap] > arr[j]) {
+        [arr[j - gap], arr[j]] = [arr[j], arr[j - gap]];
+        j -= gap;
       }
     }
     gap >>= 1;
