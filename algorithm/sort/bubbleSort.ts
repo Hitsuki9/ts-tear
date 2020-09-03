@@ -4,6 +4,7 @@
  */
 export default function bubbleSort(arr: number[]) {
   const len = arr.length;
+  let temp: number;
   // let loopCount = 0;
   // let changeCount = 0;
   for (let i = 0; i < len; i++) {
@@ -13,7 +14,10 @@ export default function bubbleSort(arr: number[]) {
       // loopCount++;
       if (arr[j] > arr[j + 1]) {
         // changeCount++;
-        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+        // [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]]; bad performance
+        temp = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = temp;
         complete = false;
       }
     }

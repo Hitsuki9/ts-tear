@@ -4,6 +4,7 @@
  */
 export default function insertSort(arr: number[]) {
   const len = arr.length;
+  let temp: number;
   // let loopCount = 0;
   // let changeCount = 0;
   for (let i = 1; i < len; i++) {
@@ -12,7 +13,10 @@ export default function insertSort(arr: number[]) {
       // loopCount++;
       if (arr[j] > arr[target]) {
         // changeCount++;
-        [arr[j], arr[target]] = [arr[target], arr[j]];
+        // [arr[j], arr[target]] = [arr[target], arr[j]]; bad performance
+        temp = arr[j];
+        arr[j] = arr[target];
+        arr[target] = temp;
         target = j;
       } else {
         break;

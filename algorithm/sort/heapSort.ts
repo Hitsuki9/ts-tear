@@ -4,9 +4,13 @@
  */
 export default function heapSort(arr: number[]) {
   createHeap(arr);
+  let temp: number;
   // 交换堆顶元素与最后一个元素，然后将剩下的元素重新调整为大顶堆
   for (let i = arr.length - 1; i > 0; i--) {
-    [arr[i], arr[0]] = [arr[0], arr[i]];
+    // [arr[i], arr[0]] = [arr[0], arr[i]]; bad performance
+    temp = arr[i];
+    arr[i] = arr[0];
+    arr[0] = temp;
     adjust(arr, 0, i);
   }
 }
@@ -21,12 +25,16 @@ function createHeap(arr: number[]) {
 }
 
 function adjust(arr: number[], target: number, len: number) {
+  let temp: number;
   for (let i = 2 * target + 1; i < len; i = 2 * i + 1) {
     if (i + 1 < len && arr[i + 1] > arr[i]) {
       i += 1;
     }
     if (arr[target] < arr[i]) {
-      [arr[target], arr[i]] = [arr[i], arr[target]];
+      // [arr[target], arr[i]] = [arr[i], arr[target]]; bad performance
+      temp = arr[target];
+      arr[target] = arr[i];
+      arr[i] = temp;
       target = i;
     } else {
       break;
