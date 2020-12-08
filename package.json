@@ -10,7 +10,7 @@
   "author": "Hitsuki9",
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "^26.0.12",
+    "@types/jest": "^26.0.18",
     "@types/node": "^14.6.2",
     "jest": "^25.5.4",
     "prettier": "^2.1.1",
