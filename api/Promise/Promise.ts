@@ -104,7 +104,7 @@ export default class Promise<T = unknown> {
       typeof onfulfilled === 'function'
         ? onfulfilled
         : function (value) {
-            return (value as unknown) as U;
+            return value as unknown as U;
           };
     onrejected =
       typeof onrejected === 'function'

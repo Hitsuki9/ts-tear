@@ -1,5 +1,5 @@
 import reverseList from './reverseList';
-import LinkedList from '../../structure/linked-list/LinkedList';
+import LinkedList from '../../structure/linked-list/linkedList';
 
 test('reverseList function is working without bugs', () => {
   const linkedList1 = new LinkedList();

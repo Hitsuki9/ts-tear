@@ -1,5 +1,5 @@
-import LinkedList from '../../structure/linked-list/LinkedList';
-import ListNode from '../../structure/linked-list/Node';
+import LinkedList from '../../structure/linked-list/linkedList';
+import ListNode from '../../structure/linked-list/node';
 
 type Node<T> = ListNode<T> | null;
 
